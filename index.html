@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospedagem Web - Trabalho Acadêmico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e configurações gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #fdbb2d;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            color: white;
+            padding: 25px 0 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo-placeholder {
+            width: 90px;
+            height: 90px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+            margin-bottom: 10px;
+        }
+        
+        .logo-placeholder i {
+            font-size: 40px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .university {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .faculty {
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .subject {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .work-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            background: linear-gradient(to right, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .deadline {
+            font-size: 1rem;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            margin-top: 5px;
+        }
+        
+        .students-info {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            max-width: 600px;
+        }
+        
+        .students-info h4 {
+            color: white;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .students-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .student {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+        
+        /* Sistema de Abas Principal */
+        .main-tabs-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .main-tabs-header {
+            display: flex;
+            background: transparent;
+            overflow-x: auto;
+            padding: 0 10px;
+        }
+        
+        .main-tab-btn {
+            padding: 15px 25px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 5px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .main-tab-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .main-tab-btn.active {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .main-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .tab-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .main-tab-btn.active .tab-indicator {
+            background: var(--accent);
+            transform: scale(1.1);
+            box-shadow: 0 0 8px var(--accent);
+        }
+        
+        .main-tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.5s ease;
+            flex: 1;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 0 0 15px 15px;
+        }
+        
+        .main-tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Estilos específicos para cada aba principal */
+        .pre-textuais-content {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: var(--dark);
+        }
+        
+        .textuais-content {
+            background: linear-gradient(135deg, #ffefba, #ffffff);
+            color: var(--dark);
+        }
+        
+        .pos-textuais-content {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            color: var(--dark);
+        }
+        
+        /* Sistema de Abas para Elementos Pré-Textuais */
+        .sub-tabs-container {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            backdrop-filter: blur(5px);
+        }
+        
+        .sub-tabs-header {
+            display: flex;
+            background: rgba(26, 42, 108, 0.7);
+            overflow-x: auto;
+            backdrop-filter: blur(5px);
+        }
+        
+        .sub-tab-btn {
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .sub-tab-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .sub-tab-btn.active {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .sub-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .sub-tab-content {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .sub-tab-content.active {
+            display: block;
+        }
+        
+        /* Conteúdo */
+        .content-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+        
+        .content-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        h2 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 15px 0 10px;
+            font-size: 1.4rem;
+        }
+        
+        h4 {
+            color: var(--primary);
+            margin: 12px 0 8px;
+            font-size: 1.2rem;
+        }
+        
+        p {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        /* Tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            border: none;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        /* Links */
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Rodapé */
+        footer {
+            background: linear-gradient(135deg, var(--primary), #0c1427);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 0 0 15px 15px;
+            margin-top: 20px;
+        }
+        
+        footer p {
+            margin: 8px 0;
+        }
+        
+        /* Elementos de Destaque */
+        .feature-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .step-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .resource-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .resource-card h5 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        /* Área para Fotos */
+        .photos-container {
+            margin: 20px 0;
+        }
+        
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .photo-placeholder {
+            background: #f8f9fa;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .photo-placeholder:hover {
+            border-color: var(--primary);
+            background: #e9ecef;
+        }
+        
+        .photo-placeholder i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .photo-upload-text {
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0 10px;
+        }
+        
+        /* Efeitos de movimento para as letras */
+        .animated-title {
+            font-size: 2rem;
+            margin: 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 5px rgba(3, 62, 255, 0.3);
+            background: linear-gradient(to right, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: rgb(251, 255, 0);
+            overflow: hidden;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+                font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+            
+        }
+        
+        .letter {
+     
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: letterAnimation 0.5s forwards;
+        }
+        
+        @keyframes letterAnimation {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .space {
+            display: inline-block;
+            width: 10px;
+        }
+        
+        /* Efeito de pulso para o título completo */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Efeito de flutuação */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Efeito de digitação */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-tabs-header, .sub-tabs-header {
+                flex-direction: column;
+            }
+            
+            .main-tab-btn, .sub-tab-btn {
+                min-width: 100%;
+                margin: 2px 0;
+            }
+            
+            .container {
+                width: 95%;
+            }
+            
+            .work-title {
+                font-size: 1.5rem;
+            }
+            
+            .university {
+                font-size: 1.5rem;
+            }
+            
+            .students-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .photos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .animated-title {
+                font-size: 1.5rem;
+                height: 50px;
+            }
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #fdbb2d44, #fdbb2d44);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .photo-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+}
+
+.photo-caption {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.lightbox-content {
+    position: relative;
+    margin: auto;
+    padding: 60px;
+    max-width: 200%;
+    max-height: 200%;
+    top: 60%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+#lightbox-img {
+    max-width: 80%;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-btn:hover {
+    color: #ff6b6b;
+}
+
+#lightbox-caption {
+    color: white;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.lightbox-nav {
+    margin-top: 20px;
+}
+
+.nav-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+}
+
+.photo-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.photo-caption {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+
+
+.photos-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Não quebra linha */
+    gap: 15px;
+    margin: 15px 0;
+    overflow-x: auto; /* Scroll horizontal se necessário */
+    padding: 10px 0;
+    scrollbar-width: thin;
+}
+
+.photos-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.photos-grid::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 4px;
+}
+
+.photo-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    flex: 0 0 auto; /* Não cresce, não encolhe, tamanho automático */
+    width: 250px; /* Largura fixa para cada item */
+    min-width: 200px; /* Largura mínima */
+}
+
+.photo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.photo-caption {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Estilo para as imagens dentro dos itens */
+.photo-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho com Logo Centralizado -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-placeholder floating">
+                       <div class="logo-placeholder floating">
+    <img src="UNIROVUMA LOGO.png" alt="Logo Universidade Rovuma"style="width: 300%; height: 135%; border-radius: 70%; object-fit: cover;">
+    
+</div>
+                    </div>
+                    <div class="university">UNIVERSIDADE ROVUMA</div>
+                    <div class="faculty">FACULDADE DE ENGENHARIA</div>
+                </div>
+                <div class="subject">PROGRAMAÇÃO E DESIGN WEB</div>
+                
+                <!-- Título com efeito de movimento -->
+                <div class="animated-title" id="animatedTitle">
+                    <!-- As letras serão inseridas via JavaScript -->
+                </div>
+                
+                <div class="deadline">Licenciatura em Informática</div>
+                
+                <!-- Informações dos Estudantes -->
+                <div class="students-info glass-effect">
+                    <h4><i class="fas fa-users"></i> Integrantes do Grupo</h4>
+                    <div class="students-list">
+                        <div class="student">Ediler Mendes Augusto Lopes</div>
+                        <div class="student">Juvenal Juma Abudo</div>
+                        <div class="student">Victorino Bernardo Mucachua</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sistema de Abas Principal com Transparência -->
+    <div class="container">
+        <div class="main-tabs-container glass-effect">
+            <div class="main-tabs-header">
+                <button class="main-tab-btn active" data-tab="pre-textuais">
+                    <span class="tab-indicator">1</span>
+                    <span>Pré-Textuais</span>
+                </button>
+                <button class="main-tab-btn" data-tab="textuais">
+                    <span class="tab-indicator">2</span>
+                    <span>Textuais</span>
+                </button>
+                <button class="main-tab-btn" data-tab="pos-textuais">
+                    <span class="tab-indicator">3</span>
+                    <span>Pós-Textuais</span>
+                </button>
+            </div>
+            
+            <!-- Aba Pré-Textuais -->
+            <div class="main-tab-content pre-textuais-content active" id="pre-textuais">
+                <h2><i class="fas fa-file-alt"></i> Elementos Pré-Textuais</h2>
+                
+                <div class="sub-tabs-container">
+                    <div class="sub-tabs-header">
+                        <button class="sub-tab-btn active" data-subtab="capa">Capa</button>
+                        <button class="sub-tab-btn" data-subtab="rosto">Folha de Rosto</button>
+                        <button class="sub-tab-btn" data-subtab="indice">Índice</button>
+                    </div>
+                    
+                    <div class="sub-tab-content active" id="capa">
+                        <div class="content-card">
+                            <h3>Capa do Trabalho</h3>
+                            <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: 8px; margin: 15px 0;">
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px;">
+                                    <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                      <img src="UNIROVUMA LOGO.png" alt="Logo Universidade Rovuma"style="width: 300%; height: 100%; border-radius: 70%; object-fit: cover;">
+                                    </div>
+                                    <div>
+                                        <h2 style="color: white; border: none; font-size: 1.8rem;">UNIVERSIDADE ROVUMA</h2>
+                                        <h3 style="color: var(--accent); margin: 8px 0;">FACULDADE DE ENGENHARIA</h3>
+                                    </div>
+                                </div>
+                                <h4 style="color: white; margin: 10px 0;">PROGRAMAÇÃO E DESIGN WEB</h4>
+                                <div style="height: 2px; background: var(--accent); width: 70%; margin: 15px auto;"></div>
+                                
+                                <!-- Título animado na capa -->
+                                <div class="animated-title" id="capaTitle" style="height: 50px; margin: 15px 0;">
+                                    <!-- As letras serão inseridas via JavaScript -->
+                                </div>
+                                
+                                <div style="height: 1px; background: rgba(255,255,255,0.3); width: 50%; margin: 15px auto;"></div>
+                                <p style="font-size: 1.1rem; margin: 10px 0;">Trabalho Acadêmico</p>
+
+                                <p style="font-size: 1rem; margin: 15px 0; background: rgba(255,255,255,0.2); display: inline-block; padding: 6px 15px; border-radius: 15px;"> Licenciatura em Informática</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-tab-content" id="rosto">
+                        <div class="content-card">
+                            <h3>Folha de Rosto</h3>
+                            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                                <div style="flex: 1; min-width: 250px;">
+                                    <h4>Informações Institucionais</h4>
+                                    <p><strong>Instituição:</strong> Universidade Rovuma</p>
+                                    <p><strong>Faculdade:</strong> Faculdade de Engenharia</p>
+                                     <p><strong>Curso:</strong> Licenciatura em Informática</p>
+                                    <p><strong>Disciplina:</strong> Programação e Design Web</p>
+                                    <p><strong>Docente:</strong> Bruno Gamito</p>
+                                    
+                                </div>
+                                <div style="flex: 1; min-width: 250px;">
+                                    <h4>Detalhes do Trabalho</h4>
+                                    <p><strong>Título:</strong> Hospedagem de Página Web</p>
+                                    <p><strong>Natureza:</strong> Trabalho Prático Avaliativo</p>
+                                    <p><strong>Local:</strong> Nampula, Moçambique</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sub-tab-content" id="indice">
+                        <div class="content-card">
+                            <h3>Índice do Trabalho</h3>
+                            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                                <div style="flex: 1; min-width: 250px;">
+                                    <h4>Estrutura Principal</h4>
+                                    <ol style="list-style-type: decimal; margin-left: 20px;">
+                                        <li><strong>Elementos Pré-Textuais</strong>
+                                            <ol style="list-style-type: decimal; margin-left: 20px;">
+                                                <li>Capa</li>
+                                                <li>Folha de Rosto</li>
+                                                <li>Índice</li>
+                                            </ol>
+                                        </li>
+                                        <li><strong>Elementos Textuais</strong>
+                                            <ol style="list-style-type: decimal; margin-left: 20px;">
+                                                <li>Introdução</li>
+                                                <li>Desenvolvimento
+                                                    <ol style="list-style-type: decimal; margin-left: 20px;">
+                                                        <li>Hospedagem Gratuita</li>
+                                                        <li>Templates Disponíveis</li>
+                                                        <li>Processo de Hospedagem</li>
+                                                    </ol>
+                                                </li>
+                                                <li>Conclusão</li>
+                                            </ol>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div style="flex: 1; min-width: 250px;">
+                                    <h4>Elementos Complementares</h4>
+                                    <ol style="list-style-type: decimal; margin-left: 20px; start="3">
+                                        <li><strong>Elementos Pós-Textuais</strong>
+                                            <ol style="list-style-type: decimal; margin-left: 20px;">
+                                                <li>Bibliografia</li>
+                                                <li>Anexos</li>
+                                            </ol>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aba Textuais -->
+            <div class="main-tab-content textuais-content" id="textuais">
+                <h2><i class="fas fa-file-contract"></i> Elementos Textuais</h2>
+                
+                <div class="content-card">
+                    <h3>Introdução</h3>
+                    <p>A hospedagem de páginas web é um aspecto fundamental no desenvolvimento de projetos online, permitindo que sites e aplicações estejam acessíveis na internet. Este trabalho tem como objetivo explorar e implementar a hospedagem de uma página web, utilizando serviços gratuitos disponíveis, e apresentar uma estrutura completa de documento acadêmico.</p>
+                    
+                    <div class="feature-box">
+                        <p><strong>Objetivos Específicos:</strong></p>
+                        <ul>
+                            <li>Identificar e comparar serviços de hospedagem gratuita</li>
+                            <li>Implementar a hospedagem de uma página web funcional</li>
+                            <li>Documentar o processo de forma clara e estruturada</li>
+                            <li>Analisar as vantagens e limitações das soluções testadas</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Serão abordados conceitos sobre hospedagem web, serviços gratuitos disponíveis, templates que podem ser utilizados e o processo prático de publicação de um site na internet.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Desenvolvimento</h3>
+                    
+                    <h4>Hospedagem Gratuita</h4>
+                    <p>Existem diversas plataformas que oferecem hospedagem gratuita para páginas web, ideais para projetos acadêmicos, portfólios e sites pessoais. Abaixo estão algumas opções recomendadas:</p>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plataforma</th>
+                                <th>Características</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>InfinityFree</strong></td>
+                                <td>Hospedagem gratuita ilimitada, suporte a PHP e MySQL, sem anúncios obrigatórios</td>
+                                <td><a href="https://www.infinityfree.com/" target="_blank">Acessar</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>GitHub Pages</strong></td>
+                                <td>Integração com repositórios GitHub, ideal para projetos de código aberto</td>
+                                <td><a href="https://pages.github.com/" target="_blank">Acessar</a></td>
+                            </tr>
+                            <tr>
+                                <td><strong>000webhost</strong></td>
+                                <td>Hospedagem gratuita da Hostinger, com painel de controle intuitivo</td>
+                                <td><a href="https://www.hostinger.com/special/000webhost" target="_blank">Acessar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Templates Disponíveis</h4>
+                    <p>Para agilizar o desenvolvimento de páginas web, é possível utilizar templates prontos que oferecem designs profissionais e responsivos. Alguns sites que disponibilizam templates gratuitos incluem:</p>
+                    
+                    <div class="resource-grid">
+                        <div class="resource-card">
+                            <h5>Tooplate</h5>
+                            <p>Oferece diversos templates HTML5 responsivos e modernos</p>
+                            <a href="https://www.tooplate.com/" target="_blank">Visitar site</a>
+                        </div>
+                        <div class="resource-card">
+                            <h5>Templatemo</h5>
+                            <p>Templates gratuitos para diversos tipos de sites</p>
+                            <a href="https://templatemo.com/" target="_blank">Visitar site</a>
+                        </div>
+                        <div class="resource-card">
+                            <h5>HTML5 UP</h5>
+                            <p>Templates responsivos e modernos em HTML5 e CSS3</p>
+                            <a href="https://html5up.net/" target="_blank">Visitar site</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Conclusão</h3>
+                    <p>A hospedagem de páginas web é uma etapa essencial no desenvolvimento de projetos online, tornando-os acessíveis para usuários em qualquer lugar do mundo. Através dos serviços gratuitos disponíveis, é possível publicar sites sem custos, ideal para projetos acadêmicos e experimentais.</p>
+                    
+                    <div class="feature-box">
+                        <p><strong>Principais Conclusões:</strong></p>
+                        <ul>
+                            <li>Serviços gratuitos oferecem recursos suficientes para projetos educacionais</li>
+                            <li>A integração com sistemas de controle de versão (Git) facilita o desenvolvimento</li>
+                            <li>Templates prontos aceleram significativamente o processo de criação</li>
+                            <li>A documentação clara é essencial para reproduzir os resultados</li>
+                        </ul>
+                    </div>
+                    
+                    <p>Este trabalho demonstrou a viabilidade de utilizar plataformas de hospedagem gratuita em conjunto com templates pré-desenvolvidos para criar páginas web profissionais de forma eficiente. A combinação dessas ferramentas permite que estudantes e desenvolvedores iniciantes publiquem seus projetos com qualidade e sem grandes investimentos financeiros.</p>
+                </div>
+            </div>
+            
+            <!-- Aba Pós-Textuais -->
+            <div class="main-tab-content pos-textuais-content" id="pos-textuais">
+                <h2><i class="fas fa-file-export"></i> Elementos Pós-Textuais</h2>
+                
+                <div class="content-card">
+                    <h3>Bibliografia</h3>
+                    <ul>
+                        <li>INFINITYFREE. <strong>InfinityFree Free Hosting</strong>. Disponível em: &lt;https://www.infinityfree.com/&gt;. Acesso em: [data de acesso].</li>
+                        <li>GITHUB. <strong>GitHub Pages</strong>. Disponível em: &lt;https://pages.github.com/&gt;. Acesso em: [data de acesso].</li>
+                        <li>HOSTINGER. <strong>000webhost</strong>. Disponível em: &lt;https://www.hostinger.com/special/000webhost&gt;. Acesso em: [data de acesso].</li>
+                        <li>TOOPLATE. <strong>Free HTML Templates</strong>. Disponível em: &lt;https://www.tooplate.com/&gt;. Acesso em: [data de acesso].</li>
+                        <li>TEMPLATEMO. <strong>Free CSS Templates</strong>. Disponível em: &lt;https://templatemo.com/&gt;. Acesso em: [data de acesso].</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3>Anexos</h3>
+                    <p>Nesta seção, incluimos materiais seguintes:</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 15px 0;">
+                        <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; text-align: center;">
+                            <i class="fas fa-image fa-2x" style="color: var(--primary); margin-bottom: 8px;"></i>
+                            <p>Print screens do processo de hospedagem</p>
+                        </div>
+                        <div>
+                            
+                            <p> </p>
+                        </div>
+                        <div>
+                           
+                            <p></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Área para Adicionar Fotos -->
+                    <div class="photos-container">
+                        <h4>Fotos do Processo de Hospedagem</h4>
+
+
+
+        
+                 <div class="photos-grid">
+   
+    <div class="photos-grid">
+    <!-- FOTO 1 -->
+    <div class="photo-item" onclick="openLightbox('1.png', 'Criando conta no GitHub')">
+        <img src="1.png" alt="Processo de hospedagem - Passo 1" 
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer;">
+        <div class="photo-caption">Passo 1: Criando conta</div>
+    </div>
+    
+    <!-- FOTO 2 -->
+    <div class="photo-item" onclick="openLightbox('2.png', 'Passo 1: Criando conta no GitHub')">
+        <img src="2.png" alt="Processo de hospedagem - Passo 1" 
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer;">
+        <div class="photo-caption">Passo 2</div>
+    </div>
+    
+    <!-- FOTO 3 -->
+    <div class="photo-item" onclick="openLightbox('3.png', 'Passo 2: Upload dos arquivos')">
+        <img src="3.png" alt="Processo de hospedagem - Passo 4" 
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer;">
+        <div class="photo-caption">Passo 3</div>
+    </div>
+    
+    <!-- FOTO 4 -->
+    <div class="photo-item" onclick="openLightbox('4.png', 'Passo 3: Configuração do GitHub Pages')">
+        <img src="4.png" alt="Processo de hospedagem - Passo 5" 
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer;">
+        <div class="photo-caption">Passo 4</div>
+    </div>
+    
+    <!-- FOTO 5 -->
+    <div class="photo-item" onclick="openLightbox('5.png', 'Passo 4: Site publicado com sucesso')">
+        <img src="5.png" alt="Processo de hospedagem - Passo 6" 
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer;">
+        <div class="photo-caption">Passo 5</div>
+    </div>
+    
+    <!-- FOTO 6 -->
+    <div class="photo-item" onclick="openLightbox('6.png', 'Resultado final - Site funcionando')">
+        <img src="6.png" alt="Processo de hospedagem - Resultado final" 
+             style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer;">
+        <div class="photo-caption">Resultado final</div>
+    </div>
+</div>
+
+<!-- LIGHTBOX PARA VISUALIZAÇÃO COMPLETA -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+        <div id="lightbox-caption"></div>
+        <div class="lightbox-nav">
+            <button class="nav-btn" onclick="changePhoto(-1)">❮ Anterior</button>
+            <button class="nav-btn" onclick="changePhoto(1)">Próxima ❯</button>
+        </div>
+    </div>
+</div>
+
+
+                     
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Trabalho Acadêmico - Programação e Design Web - Universidade Rovuma</p>
+     
+        </div>
+    </footer>
+
+    <script>
+        // Sistema de abas principal
+        document.addEventListener('DOMContentLoaded', function() {
+            const mainTabBtns = document.querySelectorAll('.main-tab-btn');
+            const mainTabContents = document.querySelectorAll('.main-tab-content');
+            
+            mainTabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove a classe active de todos os botões e conteúdos principais
+                    mainTabBtns.forEach(b => b.classList.remove('active'));
+                    mainTabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Adiciona a classe active ao botão clicado
+                    btn.classList.add('active');
+                    
+                    // Mostra o conteúdo correspondente
+                    const tabId = btn.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Sistema de abas secundário (para elementos pré-textuais)
+            const subTabBtns = document.querySelectorAll('.sub-tab-btn');
+            const subTabContents = document.querySelectorAll('.sub-tab-content');
+            
+            subTabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove a classe active de todos os botões e conteúdos secundários
+                    subTabBtns.forEach(b => b.classList.remove('active'));
+                    subTabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Adiciona a classe active ao botão clicado
+                    btn.classList.add('active');
+                    
+                    // Mostra o conteúdo correspondente
+                    const tabId = btn.getAttribute('data-subtab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Simulação de upload de fotos (para demonstração)
+            const photoPlaceholders = document.querySelectorAll('.photo-placeholder');
+            
+            photoPlaceholders.forEach(placeholder => {
+                placeholder.addEventListener('click', function() {
+                    const text = this.querySelector('.photo-upload-text').textContent;
+                    alert(`Para adicionar uma foto: ${text}\n\nSubstitua este placeholder por uma tag <img> com o caminho da sua imagem.`);
+                });
+            });
+            
+            // Animação das letras do título
+            function animateTitle(elementId, text) {
+                const element = document.getElementById(elementId);
+                element.innerHTML = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    const span = document.createElement('span');
+                    
+                    if (text[i] === ' ') {
+                        span.className = 'space';
+                        span.innerHTML = '&nbsp;';
+                    } else {
+                        span.className = 'letter';
+                        span.textContent = text[i];
+                        span.style.animationDelay = `${i * 0.1}s`;
+                    }
+                    
+                    element.appendChild(span);
+                }
+            }
+            
+            // Aplicar animação aos títulos
+            animateTitle('animatedTitle', 'Hospedagem de Página Web');
+            animateTitle('capaTitle', 'Hospedagem de Página Web');
+            
+            // Adicionar efeito de pulso após a animação das letras
+            setTimeout(() => {
+                const titles = document.querySelectorAll('.animated-title');
+                titles.forEach(title => {
+                    title.classList.add('pulse');
+                });
+            }, 4000); // 4 segundos após o início da animação
+        });
+        // Sistema de Lightbox
+let currentPhotoIndex = 0;
+const photos = [
+    { src: '1.png', caption: 'Passo 1' },
+    { src: '2.png', caption: 'Passo 2' },
+    { src: '3.png', caption: 'Passo 3' },
+    { src: '4.png', caption: 'Passo 4' },
+    { src: '5.png', caption: 'Passo 5' },
+    { src: '6.png', caption: 'Resultado final ' }
+];
+
+function openLightbox(src, caption) {
+    // Encontra o índice da foto clicada
+    currentPhotoIndex = photos.findIndex(photo => photo.src === src);
+    
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    
+    lightboxImg.src = src;
+    lightboxCaption.textContent = caption;
+    lightbox.style.display = 'block';
+    
+    // Previne scroll do body quando lightbox está aberto
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function changePhoto(direction) {
+    currentPhotoIndex += direction;
+    
+    // Loop pelas fotos
+    if (currentPhotoIndex >= photos.length) currentPhotoIndex = 0;
+    if (currentPhotoIndex < 0) currentPhotoIndex = photos.length - 1;
+    
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    
+    lightboxImg.src = photos[currentPhotoIndex].src;
+    lightboxCaption.textContent = photos[currentPhotoIndex].caption;
+}
+
+// Fechar lightbox com tecla ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeLightbox();
+    }
+    // Navegação com teclado
+    if (event.key === 'ArrowLeft') {
+        changePhoto(-1);
+    }
+    if (event.key === 'ArrowRight') {
+        changePhoto(1);
+    }
+});
+    </script>
+</body>
+</html>
